@@ -58,11 +58,6 @@ let self = stdenv.mkDerivation rec {
   };
 
   patches = [
-    # Fixes issues for users of mutter like in gala.
-    # https://github.com/elementary/gala/issues/605
-    # https://gitlab.gnome.org/GNOME/mutter/issues/536
-    ./fix-glitches-in-gala.patch
-
     # Fix build with separate sysprof.
     # https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2572
     (fetchpatch {
