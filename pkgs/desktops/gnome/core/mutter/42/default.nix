@@ -48,16 +48,21 @@
 
 let self = stdenv.mkDerivation rec {
   pname = "mutter";
-  version = "42.4";
+  version = "42.5";
 
   outputs = [ "out" "dev" "man" ];
 
   src = fetchurl {
     url = "mirror://gnome/sources/mutter/${lib.versions.major version}/${pname}-${version}.tar.xz";
-    sha256 = "wix/o9GHBh2/KAw4UOEYt7UAkGXQHeMWFqzVAMSYKkA=";
+    sha256 = "ZLdWbNE/1XC3gzjbxWT5VfOgf7tL6O63YB+9vYAjWfY=";
   };
 
   patches = [
+    # Fixes issues for users of mutter like in gala.
+    # https://github.com/elementary/gala/issues/605
+    # https://gitlab.gnome.org/GNOME/mutter/issues/536
+    ./fix-glitches-in-gala.patch
+
     # Fix build with separate sysprof.
     # https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2572
     (fetchpatch {
